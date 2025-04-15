@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+      
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'inventory/styles.css' %}">
+    </head>
+    <header>
+        <div id="headbar">
+            {% if user.is_authenticated %}
+            <a href="{% url 'log_out' %}"><button style="float: right;" class="receive">Log Out 🔐</button></a>
+            <a href="{% url 'newf' %}"><button style="float: right;" class="receive" title="Add New Flavor">+</button></a>
+            <a href="{% url 'index' %}"><button style="float: left;" title="Home" id="homebut">🏠</button></a>
+            <button style="float: right;" title="receive" class="receive" id="receive">📋</button>
+            <a href="{% url 'edit' %}"><button style="float: left;" title="Edit" id="homebut">⛮</button></a>
+            <a href="{% url 'cat' %}"><button style="float: right;" class="receive" title="Search category" >🔍</button></a>
+            <br><br><br><br><br>
+            <form action="{% url 'search' %}" method="get">
+            <input placeholder="search" style="margin-left: 5px;" type="search" name="q" id="search">
+            <button type="submit" class="receive" style="border-radius: 5px;">🔎</button>
+        
+            </form>
+            {% else %}
+            <a href="{% url 'Loginv' %}"><button style="float: right;" class="receive">Login🔑</button></a>
+            <a href="{% url 'create' %}"><button style="float: right;" class="receive">New User🔏</button></a>
+            {% endif %}
+        </div>
+    </header>
+{% block body %}
+
+{% endblock %}
+<script src="{% static 'inventory/script.js' %}"></script>
+</html>

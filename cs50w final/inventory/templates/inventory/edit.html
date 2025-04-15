@@ -1,0 +1,68 @@
+{% extends 'inventory/layout.html' %}
+
+{% block body %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<div id = 'inventory'>
+<div class="container py-5">
+    {% if not user.is_authenticated %}
+        <h1 class="text-center text-danger">Please Login to use service <b>!</b></h1>
+    {% else %}
+        <h1 class="text-center mb-4" >Inventory Edit List</h1>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            {% for i in post %}
+            <div class="id{{i.id}}">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body" id="id{{i.id}}">
+                            
+                            <h5 class="card-title">{{ i.name }}</h5>
+                            <p class="card-text">Category: <span class="text-secondary">{{ i.category }}</span></p>
+                            <p class="card-text">Cost Per Unit: $<span class="text-primary">{{ i.cost }}</span></p>
+                            <p class="card-text">Inventory Units: {{ i.units }}</p>
+                            <p class="card-text">Units in stock: {{ i.stock.get.stock }}</p>
+                            <button id="edit" onclick="editb(`{{i.id}}`)">Edit</button>
+                            <input type="hidden" name="cs" value="{{ csrf_token }}">
+                            <button onclick="del(`{{i.id}}`)">🗑️</button>
+                        </div>
+                        
+                        <div id="editform{{i.id}}" class="editform"><div id="mys" class="card-body">
+                                <h5>Edit Flavor: {{i.name}}</h5>
+                                <form action="{% url 'editb' i.id %}" method="post" >
+                                    {% csrf_token %}
+                                    <label>Flavor Name: </label><input type="text" name="name" placeholder="{{i.name}}"><br>
+                                    <label>Category: </label><input type="text" name="category"><br>
+                                    <label>Units: </label><br><input type="number" name="units"><br>
+                                    <label>Cost Per unit: </label><input step="0.01" name='cost'type="number">
+                                    <button type="submit">Save💾</button>
+                                    
+                                    
+                                </form>
+                                <button onclick="goback(`{{i.id}}`)" style="width:100%">🔙</button>
+                               
+                            </div> 
+                        </div>
+                            <script>
+                                    document.querySelectorAll('.editform').forEach(ed=>{
+                                        ed.style.display = 'none'
+                                    })
+                                </script>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+</div>
+<div id="plusinventory">
+    <form action="{% url 'addunits' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" id="submitbut">+</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
