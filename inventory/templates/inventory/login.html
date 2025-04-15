@@ -1,0 +1,19 @@
+{% extends 'inventory/layout.html' %}
+    {% block body %}
+ 
+    <div style="display:flex;justify-content: center;flex-direction: column;height:50vh;width:50vh;box-shadow: 5px 5px 5px 5px black;margin-top: 10px;align-items: center;resize: both;">
+        
+       <h1 style="text-shadow: 1px 1px;font-size: 80px;">Login</h1>
+        <form action="{% url 'Loginv' %}" method="post" >
+            {% csrf_token %}
+            <div style="padding:5px;">
+             {{form.username}}
+            </div>
+             <div style="padding: 5px;">
+             {{form.password}}
+            </div>
+            <button type="submit" style="padding:5px;margin:10px;background-color: white;" id="loginbut">Login</button>
+        </form>
+    
+  </div>
+    {% endblock %}

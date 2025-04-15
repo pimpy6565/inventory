@@ -1,0 +1,15 @@
+{% extends 'inventory/layout.html' %}
+    {% block body %}
+    <div style="position:absolute;left:25%;padding:50px">
+        <h1>
+            Create New User
+        </h1>
+        <form action="{% url 'create' %}" method="post">
+            {% csrf_token %}
+            {{form.error}}
+            {{form}}
+            <button type="submit" style="padding:5px;margin:20px;">Create New User</button>
+        </form>
+    </div>
+        
+    {% endblock %}

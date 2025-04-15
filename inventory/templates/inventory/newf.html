@@ -1,0 +1,25 @@
+{% extends 'inventory/layout.html' %}
+{% block body %}
+{% if user.is_authenticated %}
+<div id="inventory">
+<div style="font-size: 50px;padding: 10px;">
+    <h1>Add New Flavor</h1>
+<form method="post" action="{% url 'newf' %}">
+    {% csrf_token %}
+    <label>Flavor Name: </label><input type="text" name="name"><br>
+    <label>Category: </label><input type="text" name="category"><br>
+    <label>Units: </label><input type="number" name="units"><br>
+    <label>Cost Per unit: </label><input step="0.01" name='cost'type="number">
+    <button type="submit" id="submitbut">+</button>
+</form>
+</div>
+</div>
+<div id="plusinventory">
+    <form action="{% url 'addunits' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" id="submitbut">+</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
