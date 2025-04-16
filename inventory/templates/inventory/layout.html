@@ -18,9 +18,9 @@
             <button style="float: right;" title="receive" class="receive" id="receive">📋</button>
             <a href="{% url 'edit' %}"><button style="float: left;" title="Edit" id="homebut">⛮</button></a>
             <a href="{% url 'cat' %}"><button style="float: right;" class="receive" title="Search category" >🔍</button></a>
-            <br><br><br><br><br>
+            
             <form action="{% url 'search' %}" method="get">
-            <input placeholder="search" style="margin-left: 5px;" type="search" name="q" id="search">
+            <input placeholder="search" style="position: absolute; bottom: 10px; left: 10px;" type="search" name="q" id="search">
             <button type="submit" class="receive" style="border-radius: 5px;">🔎</button>
         
             </form>
