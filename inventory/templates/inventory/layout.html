@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="{% static 'inventory/styles.css' %}">
     </head>
     <header>
-        <div id="headbar">
+        <div id="headbar" style="position:relative;">
             {% if user.is_authenticated %}
             <a href="{% url 'log_out' %}"><button style="float: right;" class="receive">Log Out 🔐</button></a>
             <a href="{% url 'newf' %}"><button style="float: right;" class="receive" title="Add New Flavor">+</button></a>
